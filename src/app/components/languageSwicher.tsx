@@ -1,20 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import { useLanguageStore } from '../../store/uselanguageStore';
 
 export default function LanguageSelector() {
-  const [lang, setLang] = useState(() => Cookies.get('locale') || 'de');
+  const language = useLanguageStore((state) => state.language);
+  const setLanguage = useLanguageStore((state) => state.setLanguage);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newLang = e.target.value;
-    setLang(newLang);
-    Cookies.set('locale', newLang, { path: '/' });
-    location.reload(); // 刷新页面触发 server component 重新渲染
+    setLanguage(e.target.value);
   };
 
   return (
-    <select value={lang} onChange={handleChange}>
+    <select value={language} onChange={handleChange}>
       <option value="de">Deutsch</option>
       <option value="en">English</option>
     </select>
