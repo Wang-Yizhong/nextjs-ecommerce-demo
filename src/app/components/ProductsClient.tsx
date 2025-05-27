@@ -27,14 +27,24 @@ export default function ProductsClient({ products }: { products: any[] }) {
   const t = (key: string) => translations[key] || key;
 
   return (
-    <div>
-      <h1>{t('product_list_title')}</h1>
-      {products.map((product) => (
-        <div key={product.id}>
-          <h2>{t(product.name_key)}</h2>
-          <p>{t(product.description_key)}</p>
-        </div>
-      ))}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+  {products.map(product => (
+    <div
+      key={product.id}
+      className="rounded-xl shadow-sm border p-4 hover:shadow-lg transition cursor-pointer"
+    >
+      <img
+        src={product.image_url}
+        alt={product.name_key}
+        className="w-full h-48 object-cover rounded-md mb-3"
+      />
+      <h2 className="text-lg font-semibold">{t(product.name_key)}</h2>
+      <p className="text-gray-600 text-sm">{t(product.description_key)}</p>
+      <p className="text-primary mt-2 text-right font-bold text-base">
+        € {product.price.toFixed(2)}
+      </p>
     </div>
+  ))}
+</div>
   );
 }

@@ -1,9 +1,9 @@
 // src/app/layout.tsx
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import { getMessages } from 'next-intl/server'; // ✅ fix
+import { getMessages } from 'next-intl/server'; 
 import { NextIntlClientProvider } from 'next-intl';
-import './globals.css';
+import '../app/globals.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: 'E-commerce with Next.js and Supabase',
 };
 
-// ✅ make it async
+//  make it async
 export async function LocaleLayout({
   children,
   params: { locale }
@@ -28,7 +28,7 @@ export async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  const messages = await getMessages(); // ✅ async-safe
+  const messages = await getMessages(); 
 
   return (
     <html lang={locale}>
